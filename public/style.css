@@ -169,7 +169,7 @@ textarea::placeholder {
 }
 
 #adv-cal .day-container{
-    min-width: 26em;
+    min-width: 22em;
     max-width: 32em;
     width: 100%;
     height: var(--day-box-height);
@@ -216,8 +216,8 @@ textarea::placeholder {
 }
 
 .day-container .day-header span{
-    font-size: 2.6em;
-    line-height: 1.6em;
+    font-size: 2.2em;
+    line-height: 2em;
     color:#bcfffc;
     font-family: 'Fredericka the Great', cursive;
 }

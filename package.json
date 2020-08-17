@@ -1,5 +1,5 @@
 {
- "name": "adv-cal",
+ "name": "voda-cal",
  "main": "server.js",
  "dependencies": {
   "koa": "^2.11.0",

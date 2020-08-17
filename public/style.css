@@ -1,0 +1,327 @@
+:root{
+    --day-box-height: 100%;
+    --day-box-color: #ffffff;
+    --no-person-grey: #807f80;
+    --todays-green: #b5ffc5;
+    --textarea-color: #fff;
+}
+
+body,html,h2,p{
+    margin:0;
+    padding:0;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+body{
+    height: 100vh;
+}
+
+h1{
+    margin-top: 0;
+    color:#000000;
+    font-family: 'Pacifico', cursive;
+}
+
+h1, h2{
+    font-weight: normal;
+}
+
+header{
+    padding: 2em 0 0 0;
+    max-width: 35em;
+    margin: 0 auto;
+    position: relative;
+}
+
+textarea::-webkit-input-placeholder {
+  color: var(--textarea-color);
+}
+
+textarea:-moz-placeholder { /* Firefox 18- */
+  color: var(--textarea-color);  
+}
+
+textarea::-moz-placeholder {  /* Firefox 19+ */
+  color: var(--textarea-color);  
+}
+
+textarea:-ms-input-placeholder {
+  color: var(--textarea-color);  
+}
+
+textarea::placeholder {
+  color: var(--textarea-color);  
+}
+
+#cal-title{
+    text-align: center;
+}
+
+#contact-elves{
+    position: absolute;
+    right: 1em;
+    bottom: -2em;
+}
+
+#contact-elves img{
+    width: 4.5em;
+    transform: rotate(20deg);
+    animation: shake 5s cubic-bezier(.12,.89,.94,.69) infinite;
+    cursor: pointer;
+}
+
+#letter-container{
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    transition: all 0.3s ease-out;
+    overflow: hidden;
+}
+
+#letter-container.closed{
+    top: -100vh;
+    height: 0;
+}
+
+#msg-status{
+    color: #d19e9e;
+    padding: 1em 0 0 0;
+    font-size: 1.5em;
+    font-family: 'Fredericka the Great', cursive;
+}
+
+#msg-status.no-show{
+    opacity: 0;
+    transition: all 0.3s ease-out;
+}
+
+#msg-status.show{
+    opacity: 1;
+    transition: all 0.3s ease-out;
+}
+
+#letter-container #letter-for-me{
+    width: 80%;
+    max-width: 35em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: rgba(150,62,62,0.5);
+    resize: none;
+    border: 1px solid #940000;
+    padding: 2em;
+    caret-color: var(--textarea-color);
+    color: var(--textarea-color);
+    font-size: 1em;
+    margin-top: 2.5em;
+}
+
+#letter-container #letter-for-me:focus{
+    border: 1px solid #940000;;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+#letter-container #send-letter-button{
+    display: block;
+    width: 15em;
+    height: 3em;
+    margin: 2em auto;
+    background: rgba(0,107,58,0.5);
+    color: var(--textarea-color);
+    border:1px solid #006300;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#letter-container #send-letter-button:focus{
+    outline: none;
+}
+
+#close-container{
+    max-width: 35em;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#close-container img{
+    width: 3.5em;
+    transform: rotate(5deg);
+    cursor: pointer;
+}
+
+#cal-container{
+    max-width: 35em;
+    margin: 0 auto;
+}
+
+#adv-cal{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#adv-cal .day-container{
+    min-width: 34em;
+    height: var(--day-box-height);
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #000;
+    /*background-color:  #545433;*/
+    margin: 1em;
+}
+
+#adv-cal .day-container.no-person{
+    border: 1px solid var(--no-person-grey);
+    height: 6em;
+}
+
+#adv-cal .day-container.person-of-today{
+    border: 1px solid var(--todays-green);
+}
+
+
+#adv-cal .day-container,
+.day-container .day-header,
+.day-container .person-of-the-day,
+#letter-container #letter-for-me,
+#letter-container #send-letter-button{
+    border-radius: 5px;
+}
+
+.day-container .day-header,
+.day-container .person-of-the-day{
+    height: var(--day-box-height);
+    width: 100%;
+}
+
+.day-container .day-header{
+    position: absolute;
+    top: 0em;
+    opacity: 1;
+    transition: all 0.3s ease-out;
+    background-color: rgba(11, 0, 30, .5);  
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.day-container .day-header span{
+    font-size: 3.2em;
+    color:#bcfffc;
+    font-family: 'Fredericka the Great', cursive;
+}
+
+.day-container.opened .day-header{
+    top:calc(0em - var(--day-box-height));
+}
+
+.day-container.revealed .day-header{
+    opacity: 0;
+}
+
+.day-container p.person-of-the-day{
+    color: var(--day-box-color);
+    font-family: 'Fredericka the Great', cursive;
+    line-height: 1.3em;
+    font-size: 1.8em;
+    transition: all 0.2s ease-in;
+}
+
+.day-container.no-person p.person-of-the-day #loading-gif{
+    height: 2.7em;
+    opacity: 0;
+    transition: all 0.3s ease-out;
+}
+
+.day-container.no-person.opened p.person-of-the-day #loading-gif,
+.day-container.no-person.revealed p.person-of-the-day #loading-gif{
+    opacity: 1;
+}
+
+.day-container p.person-of-the-day span{
+    display: block;
+    padding: 0.7em 0.3em 0.3em 0.3em;
+}
+
+.noActiveDays .day-container.person-of-today{
+    width: 100%;
+}
+
+.noActiveDays .day-container p.person-of-the-day span{
+    font-size: 0.5em;
+    line-height: 1.5em;
+    font-family: 'Pacifico', cursive;;
+}
+
+.noActiveDays .decoration{
+    display: none;
+}
+
+.day-container.no-person .day-header span{
+    color:var(--no-person-grey);
+}
+
+.noActiveDays .person-of-today .day-header span{
+    font-size: 19em;
+}
+
+.day-container.person-of-today .day-header span{
+    color:var(--todays-green);
+}
+
+.day-container.opened p.person-of-the-day{
+    background-color: var(--day-box-color);
+    opacity: 1;
+    color: #0c0c0c;
+}
+
+.decoration{
+    width: 2.5em;
+    padding: 0.5em 0 0 6%;
+    display: block;
+    transform: rotate(25deg);
+}
+
+.no-highlight{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.snowy-background{
+    background-color: #a1dddd;
+    background-image: radial-gradient(white, rgba(255,255,255,.2) 5px, transparent 20px), radial-gradient(white, rgba(255,255,255,.15) 3px, transparent 30px), radial-gradient(white, rgba(255,255,255,.1) 4px, transparent 15px), radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 3px, transparent 20px);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+}
+
+@keyframes shake {
+    0%,20%{
+        transform: rotate(20deg);
+    }
+
+    5%{
+        transform: rotate(7deg);
+    }
+
+    10%{
+        transform: rotate(15deg);
+    }
+
+    15%{
+        transform: rotate(8deg);
+    }
+
+}

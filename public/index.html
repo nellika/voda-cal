@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Pacifico&display=swap&subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet">
+    <title>Nelli's Vodafone calendar</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="vue.min.js"></script>
+    <link rel="shortcut icon" href="./cake.ico" />
+</head>
+<body class="snowy-background">
+    <div id="cal-app">
+        <header>
+            <h1 id="cal-title">My Vodafone calendar</h1>
+        </header>
+        <main id='cal-container'>
+            <section id="adv-cal" v-bind:class="[nrOfActiveDays > 0 ? 'hasActiveDays':'noActiveDays']">
+                <article @click="toggleOpened" v-for='(person, index) in people' v-bind:class="[index == people.length-1 ? 'day-container' : 'day-container']">
+                    <h2 class="day-header no-highlight">
+                        <span>{{person.role}}</span>
+                        <img v-bind:src="getDecorImg(index)" class="decoration">
+                    </h2>
+                    <p class="person-of-the-day no-highlight"><span v-html="person.name"></span></p>
+                </article>
+            </section>
+        </main>
+    </div>
+<script>
+    const app = new Vue({
+        el: '#cal-app',
+        data: {
+            people: [],
+            nrOfActiveDays: 0
+        },
+        created(){
+            fetch('/api/people')
+                .then(response => response.json())
+                .then(json => {
+                    this.people = json;
+                    this.nrOfActiveDays = this.people.length;                    
+                })
+        },
+        methods: {
+            toggleOpened: function(e){
+                let elChild;
+                let classToToggle = 'opened';
+
+                if(e.target.tagName.toUpperCase() == 'H2'){
+                    elChild = e.path[1];        
+                } else {
+                    elChild = e.path[2];
+                }
+
+                if(this.nrOfActiveDays==0){
+                    classToToggle = 'revealed'
+                }
+                
+                elChild.classList.toggle(classToToggle); 
+            },
+            getDecorImg : function(index) {
+                return `decor/${index}.svg`;
+            }
+        }
+    })
+</script>
+</body>
+</html>

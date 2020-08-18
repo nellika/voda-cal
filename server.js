@@ -12,6 +12,7 @@ let router = new Router();
 let people = [{"role":'Sport maniac',"name":'Laccer'},
              {"role":'Mentor no.1',"name":'Balázs'},
              {"role":'Bicikli pajtás',"name":'Lóci'},
+			 {"role":'Hamster owner',"name":'Attila'},
              {"role":'Fóka pajtás',"name":'Peti'},
              {"role":'Insta tréner',"name":'Flávi'},
              {"role":'Indian dancer',"name":'Gaurav'},
